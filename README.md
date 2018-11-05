@@ -32,8 +32,10 @@ Given these breakdowns we have a component hierarchy that looks like:
 
 #### Sample Data
 
+Even though we will be using an API to show data dynamically, it can be useful to start with some hard coded data to make sure our UI opperates properly before we connect to an API.  Copy and Paste this array of objects into wherever you declare your highest level of state.
+
 ```js
-const results = [
+[
   {
     "name":"The Office",
     "image":"http://static.tvmaze.com/uploads/images/medium_portrait/85/213184.jpg"
@@ -123,8 +125,6 @@ We will need three functions defined on the `SearchContainer` component to provi
 2. `onSubmitQuery` for kicking of the ajax request
 3. `onSearchAgain` to set state back to render the search bar
 
-> What is the point of all of these `.bind(this)` statements?
-
 ## Pre-API Integration Steps
 
 Make sure that your TVMaze application handles user input properly.
@@ -132,7 +132,7 @@ Make sure that your TVMaze application handles user input properly.
 ### Handling User Input
 
 The user-inputted value will be `SearchContainer`'s `this.state.query`, after you've done the following things...
-1. In `SearchContainer`, add the `handleSearchInput` method to the `class`, and bind it in the `constructor`, if you have not already.
+1. In `SearchContainer`, add the `handleSearchInput` method to the `class`.
 2. Pass `handleSearchInput` to the `Search` component via props.
 3. In `Search`, you'll have to use the `onChange` event-listener prop to attach the method `handleSearchInput` from `SearchContainer`, available in `Search` as `this.props.handleSubmitInput`. [See here for an example from the React docs](https://reactjs.org/docs/forms.html#controlled-components).
 
@@ -149,20 +149,14 @@ There, you'll see an example of a URL you can use to query the TVMaze API. Ultim
 > Installing axios...
 
 ```sh
- $ yarn add axios
-```
-
-or
-
-```sh
  $ npm i axios
 ```
 
-Yarn is Facebook's version of `npm`. If you don't have it, can be installed with `brew install yarn`, or `npm i -g yarn`.
-
 ### Fetching Data from the API with axios
 
-> Create a new file called `Util.js`. Export a function like so...
+> Create a new file called `util.js`. Export a function like so...
+
+**MAKE SURE TO READ THE COMMENTS IN THIS CODE SNIPPET**
 
 ```js
 import axios from 'axios'
